@@ -1,10 +1,11 @@
 // @flow
 const exec = require('child_process').exec;
 
-const commit = 'git commit -am "build update" ';
+const add = 'git add . ';
+const commit = '&& git commit -am "build update" ';
 const publish = '&& git subtree push --prefix build origin gh-pages ';
 
-exec(commit + publish, (error, stdout, stderr) => {
+exec(add + commit + publish, (error, stdout, stderr) => {
   if (error) {
     console.log(error);
   }
