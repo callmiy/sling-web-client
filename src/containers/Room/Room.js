@@ -29,7 +29,6 @@ class Room extends Component {
   }
 
   componentDidMount() {
-    this.props.resetNewRoomUrl();
     this.props.connectToRoomChannel(this.props.socket, this.props.id);
   }
 

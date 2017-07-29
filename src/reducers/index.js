@@ -53,9 +53,6 @@ export const getRoomsPagination = (state: Object) =>
 export const getRoomsChannel = (state: Object) =>
   fromRooms.getRoomsChannel(state.rooms);
 
-export const getNewRoomUrl = (state: Object) =>
-  fromRooms.getNewRoomUrl(state.rooms);
-
 export const getUserRoomFromRoomId = (
   state: Object,
   roomId: string,

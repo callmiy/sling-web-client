@@ -5,14 +5,13 @@ import {
   CHANNEL_EVENT_NEW_ROOM,
 } from './../constants';
 import {
-  createRoomSuccess,
   createRoomFailed,
-  newRoomUrl,
 } from './../actions/createRoom';
+
 
 const createRoom = (action$: Object) =>
   action$.ofType(CREATE_NEW_ROOM)
-    .switchMap(({ channel, room }) =>
+    .switchMap(({ channel, room, cb }) =>
       Observable.create((observer) => {
         if (!channel) {
           return () => {};
@@ -21,19 +20,24 @@ const createRoom = (action$: Object) =>
         channel
           .push(CHANNEL_EVENT_NEW_ROOM, room)
           .receive('ok', ({ room_id }) =>
-            observer.next(Observable.of(
-              createRoomSuccess(room_id), newRoomUrl(room_id),
-            )),
+            observer.next({
+              cb,
+              room_id,
+              type: 'CREATE_NEW_ROOM_SUCCESS_CB',
+            }),
           )
           .receive('error', ({ errors }) =>
-            observer.next(Observable.of(
-              createRoomFailed(errors),
-            )),
+            observer.next(createRoomFailed(errors)),
           );
 
         return () => {};
       }),
     )
-    .switchMap((val$) => val$);
+    .map((val) => val)
+    .do(({ cb, room_id }) => {
+      if (cb) {
+        cb(room_id);
+      }
+    });
 
 export default createRoom;

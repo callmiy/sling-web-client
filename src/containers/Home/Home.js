@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
 import NewRoomForm from './../../components/NewRoomForm';
 import Rooms from './../../components/Rooms';
@@ -56,13 +55,9 @@ class Home extends Component {
     )
 
   createRoom = (room: Object) =>
-    this.props.createRoom(this.props.roomsChannel, room);
+    this.props.createRoom(this.props.roomsChannel, room, this.props.history);
 
   render() {
-    if (this.props.newRoomUrl) {
-      return <Redirect to={this.props.newRoomUrl} />;
-    }
-
     const {
       rooms,
       currentUserRoomsIds,

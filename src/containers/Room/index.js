@@ -11,7 +11,6 @@ import {
   getCurrentRoom,
   getUserRoomFromRoomId,
 } from './../../reducers';
-import { resetNewRoomUrl } from './../../actions/createRoom';
 import Room from './Room';
 import {
   connectToRoomChannel,
@@ -44,7 +43,6 @@ export default connect(
       state, ownProps.match.params.id),
   }),
   {
-    resetNewRoomUrl,
     connectToRoomChannel,
     leaveRoomChannel,
     createMessage,

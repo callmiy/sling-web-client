@@ -8,7 +8,6 @@ import {
   getRoomsPagination,
   getSocket,
   getUser,
-  getNewRoomUrl,
 } from './../../reducers';
 import Home from './Home';
 import { fetchRooms } from './../../actions/fetchRooms';
@@ -30,7 +29,6 @@ export default withRouter(
       socket: getSocket(state),
       roomsChannel: getRoomsChannel(state),
       userId: getUser(state).id,
-      newRoomUrl: getNewRoomUrl(state),
     }),
     {
       fetchRooms,

@@ -7,8 +7,6 @@ import {
   FETCH_ROOMS_SUCCESS,
   FETCH_USER_ROOMS_SUCCESS,
   ROOM_JOINED,
-  NEW_ROOM_URL,
-  RESET_NEW_ROOM_URL,
 } from './../constants';
 
 const roomsChannel = (state: null | Object = null, action: Object) => {
@@ -82,24 +80,11 @@ const currentUserRooms = (state: Array<Object> = [], action: Object) => {
   }
 };
 
-const newRoomUrl = (state: null | string = null, action: Object) => {
-  const { type, url } = action;
-  switch (type) {
-    case NEW_ROOM_URL:
-      return url;
-    case RESET_NEW_ROOM_URL:
-      return null;
-    default:
-      return state;
-  }
-};
-
 export default combineReducers({
   all: allRooms,
   channel: roomsChannel,
   pagination,
   currentUserRooms,
-  newRoomUrl,
 });
 
 export const getAllRooms = (state: Object) => state.all;
@@ -114,9 +99,6 @@ export const getRoomsPagination = (state: Object) =>
   state.pagination;
 
 export const getRoomsChannel = (state: Object) => state.channel;
-
-export const getNewRoomUrl = (state: Object) =>
-  state.newRoomUrl;
 
 export const getUserRoomFromRoomId = (
   state: Object,
