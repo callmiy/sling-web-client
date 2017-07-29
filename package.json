@@ -1,7 +1,8 @@
 {
-  "name": "xx",
+  "name": "sling_redux_observable",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://samba6.github.io/sling1",
   "dependencies": {
     "aphrodite": "^1.2.1",
     "bootstrap": "4.0.0-alpha.6",
