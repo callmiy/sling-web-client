@@ -2,7 +2,6 @@
 import {
   REFRESH_SESSION,
   API_REFRESH_URL,
-  REFRESH_SUCCESS,
   REFRESH_FAILED,
  } from './../constants';
 
