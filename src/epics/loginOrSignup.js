@@ -7,7 +7,8 @@ type argsType = {
   errorCb: (any) => Object,
  }
 
-export const authCbAction = (cb) => ({ type: 'callback', cb });
+export const authCbAction = (cb: () => mixed) =>
+  ({ type: 'callback', cb });
 
 export default (
   action$: Object,
@@ -23,12 +24,11 @@ export default (
             ...onAuthSuccess(response),
             authCbAction(cb),
           ))
-          .catch((error) => Observable.throw(error)),
+          .catch((error) => Observable.of(Observable.of(errorCb(error)))),
       )
       .switchMap((x) => x)
       .do(({ cb }) => {
         if (cb) {
           cb();
         }
-      })
-      .catch((error) => Observable.of(errorCb(error)));
+      });
