@@ -1,6 +1,7 @@
 // @flow
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { startSubmit } from 'redux-form';
 import {
   getAllRooms,
   getAllRoomsIds,
@@ -35,6 +36,7 @@ export default withRouter(
       createRoom,
       leaveRoomsUtilsChannel,
       connectToRoomsUtilsChannel,
+      startSubmit,
     },
   )(Home),
 );

@@ -6,6 +6,7 @@ import Rooms from './../../components/Rooms';
 import Pagination from './../../components/Pagination';
 import Sidebar from './../../components/Sidebar';
 import Navbar from './../../components/Navbar';
+import { NEW_ROOM_FORM_NAME } from './../../constants';
 
 const styles = StyleSheet.create({
   card: {
@@ -62,6 +63,7 @@ class Home extends Component {
       rooms,
       currentUserRoomsIds,
       pagination,
+      startSubmit,
      } = this.props;
 
     return (
@@ -75,7 +77,11 @@ class Home extends Component {
               Create a new room
             </h3>
 
-            <NewRoomForm onSubmit={(room) => this.createRoom(room)} />
+            <NewRoomForm onSubmit={(room) => {
+              startSubmit(NEW_ROOM_FORM_NAME);
+              this.createRoom(room);
+            }}
+            />
           </div>
 
           {pagination.total_entries &&

@@ -18,7 +18,14 @@ const styles = StyleSheet.create({
 });
 
 const SingupForm = (props: Object) => {
-  const { handleSubmit, submitting, pristine, reset, error, invalid } = props;
+  const {
+    handleSubmit,
+    submitting,
+    pristine,
+    reset,
+    error,
+    invalid,
+   } = props;
 
   return (
     <form onSubmit={handleSubmit} className={`card ${css(styles.card)}`}>

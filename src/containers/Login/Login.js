@@ -2,19 +2,25 @@
 import React from 'react';
 import LoginForm from './../../components/LoginForm';
 import Navbar from './../../components/Navbar';
+import { LOGIN_FORM_NAME } from './../../constants';
 
 type propType = {
-  login: (Object) => void,
+  login: (...any) => void,
+  startSubmit: (string) => void,
   history: Object,
 }
 
 const Login = (props: propType) => {
-  const { login, history } = props;
+  const { login, history, startSubmit } = props;
 
   return (
     <div>
       <Navbar />
-      <LoginForm onSubmit={(user) => login(user, history)} />
+      <LoginForm onSubmit={(user) => {
+        startSubmit(LOGIN_FORM_NAME);
+        login(user, history);
+      }}
+      />
     </div>
   );
 };
