@@ -2,7 +2,6 @@
 import { combineEpics } from 'redux-observable';
 import logout from './logout';
 import login from './login';
-import fetchUserRooms from './fetchUserRooms';
 import connectToSocket from './connectToSocket';
 import refresh from './refresh';
 import connectToRoomsUtilsChannel from './connectToRoomsUtilsChannel';
@@ -20,7 +19,6 @@ export default combineEpics(
   logout,
   connectToSocket,
   login,
-  fetchUserRooms,
   refresh,
   connectToRoomsUtilsChannel,
   fetchRooms,

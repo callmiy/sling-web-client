@@ -20,25 +20,16 @@ class Home extends Component {
   componentDidMount() {
     if (this.props.isAuthenticated) {
       this.props.connectToRoomsUtilsChannel(
-        this.props.socket, this.props.userId,
+        this.props.socket, this.props.userId, this.getRoomPaginationParams(),
       );
-
-      this.loadRooms(null);
     }
   }
 
   componentWillReceiveProps(nextProps: Object) {
     if (!this.props.socket && nextProps.socket) {
       this.props.connectToRoomsUtilsChannel(
-        nextProps.socket, this.props.userId,
+        nextProps.socket, this.props.userId, this.getRoomPaginationParams(),
       );
-    }
-
-    if (this.props.rooms.length === 0 &&
-         !this.props.roomsChannel &&
-         nextProps.roomsChannel
-    ) {
-      this.loadRooms(nextProps.roomsChannel);
     }
   }
 
@@ -46,13 +37,17 @@ class Home extends Component {
     this.props.leaveRoomsUtilsChannel(this.props.roomsChannel);
   }
 
-  pageSize = 5
+  getRoomPaginationParams = (page: number = 1) => ({
+    page,
+    page_size: this.pageSize,
+  })
 
+  pageSize = 5
   props: Object
 
-  loadRooms = (channel: null | Object, page: number = 1) =>
+  loadRooms = (channel: null | Object, page: number) =>
     this.props.fetchRooms(
-      channel || this.props.roomsChannel, { page, page_size: this.pageSize },
+      channel || this.props.roomsChannel, this.getRoomPaginationParams(page),
     )
 
   createRoom = (room: Object) =>

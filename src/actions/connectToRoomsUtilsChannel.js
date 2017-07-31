@@ -4,10 +4,15 @@ import {
   CONNECTED_TO_ROOMS_UTILS_CHANNEL_SUCCESS,
 } from './../constants';
 
-export const connectToRoomsUtilsChannel = (socket: Object, userId: string) =>
+export const connectToRoomsUtilsChannel = (
+  socket: Object,
+  userId: string,
+  params: Object,
+) =>
   ({
     socket,
     userId,
+    params,
     type: CONNECT_TO_ROOMS_UTILS_CHANNEL,
   });
 

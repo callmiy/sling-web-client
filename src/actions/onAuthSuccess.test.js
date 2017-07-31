@@ -3,7 +3,6 @@ import onAuthSuccess from './onAuthSuccess';
 import * as authManager from './../authManager';
 import connectToSocket from './../actions/connectToSocket';
 import authenticationSuccess from './../actions/authenticationSuccess';
-import { fetchUserRooms } from './../actions/fetchUserRooms';
 
 test('onAuthSuccess', () => {
   const writeSession = jest.spyOn(authManager, 'writeSession');
@@ -18,7 +17,6 @@ test('onAuthSuccess', () => {
 
   expect(onAuthSuccess(response)).toEqual([
     authenticationSuccess(response),
-    fetchUserRooms(response.data.id),
     connectToSocket(),
   ]);
 

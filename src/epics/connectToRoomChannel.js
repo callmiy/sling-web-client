@@ -23,6 +23,13 @@ export default (action$: Object) =>
         }
 
         const channel = socket.channel(`rooms:${roomId}`);
+
+        channel
+          .join()
+          .receive('ok', (response: Object) => {
+            observer.next(connectToRoomChannelSuccess(response, channel));
+          });
+
         let presences = {};
 
         channel.on('presence_state', (state: Object) => {
@@ -37,12 +44,6 @@ export default (action$: Object) =>
         channel.on(CHANNEL_EVENT_MESSAGE_CREATED, (message: Object) => {
           observer.next(createMessageSuccess(message));
         });
-
-        channel
-          .join()
-          .receive('ok', (response: Object) => {
-            observer.next(connectToRoomChannelSuccess(response, channel));
-          });
 
         return () => {};
       }),
