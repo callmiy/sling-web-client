@@ -8,7 +8,7 @@ type argsType = {
  }
 
 export const authCbAction = (cb: () => mixed) =>
-  ({ type: 'callback', cb });
+  ({ type: 'LOGIN/SIGNUP SUCCESS EPICS CALLBACK', cb });
 
 export default (
   action$: Object,
