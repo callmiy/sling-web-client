@@ -20,12 +20,9 @@ const middlewares = [
   epicMiddleware,
 ];
 
-// if (process.env.NODE_ENV !== 'production') {
-middlewares.push(logger);
-// }
-console.log('\n\nlogging starts\n\n',
-middlewares
-, '\n\nlogging ends\n\n');
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(logger);
+}
 
 const store = createStore(reducers, applyMiddleware(...middlewares));
 
