@@ -38,7 +38,7 @@ class Root extends Component {
 
     return (
       <Provider store={store}>
-        <Router basename="/sling1">
+        <Router basename="/slung">
           <Switch>
             <AuthRequired
               isAuthenticated={isAuthenticated}
