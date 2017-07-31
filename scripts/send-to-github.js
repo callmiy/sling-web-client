@@ -5,7 +5,7 @@ if (allSet !== 'yes') {
 }
 const exec = require('child_process').exec;
 
-const add = 'git subtree push --prefix build origin gh-pages && git add . ';
+const add = 'git add . ';
 const commit = '&& git commit -am "build update" ';
 const publish = '&& git subtree push --prefix build origin gh-pages ';
 
