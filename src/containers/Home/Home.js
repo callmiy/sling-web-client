@@ -79,26 +79,26 @@ class Home extends Component {
             />
           </div>
 
-          {pagination.total_entries &&
-          <div className={`card ${css(styles.card)}`}>
-            <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>
-              Join a room
-            </h3>
+          {!!pagination.total_entries &&
+            <div className={`card ${css(styles.card)}`}>
+              <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>
+                Join a room
+              </h3>
 
-            <Rooms
-              rooms={rooms.slice(0, this.pageSize)}
-              currentUserRoomsIds={currentUserRoomsIds}
-              joinRoom={(room) => this.createRoom(room)}
-            />
+              <Rooms
+                rooms={rooms.slice(0, this.pageSize)}
+                currentUserRoomsIds={currentUserRoomsIds}
+                joinRoom={(room) => this.createRoom(room)}
+              />
 
-            <Pagination
-              {...pagination}
-              pageSize={this.pageSize}
-              numRooms={rooms.length}
-              loadRooms={this.loadRooms}
-            />
-          </div>
-        }
+              <Pagination
+                {...pagination}
+                pageSize={this.pageSize}
+                numRooms={rooms.length}
+                loadRooms={this.loadRooms}
+              />
+            </div>
+          }
         </div>
       </div>
     );
