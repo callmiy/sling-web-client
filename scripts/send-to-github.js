@@ -1,7 +1,11 @@
 // @flow
+const allSet = process.env.SLING_APP_ALL_SET_1;
+if (allSet !== 'yes') {
+  throw new Error('APP CAN NOT BE DEPLOYED!!');
+}
 const exec = require('child_process').exec;
 
-const add = 'git add . ';
+const add = 'git subtree push --prefix build origin gh-pages && git add . ';
 const commit = '&& git commit -am "build update" ';
 const publish = '&& git subtree push --prefix build origin gh-pages ';
 
