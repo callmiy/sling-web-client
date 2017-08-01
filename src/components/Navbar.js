@@ -30,25 +30,30 @@ const styles = StyleSheet.create({
   },
 });
 
-const NetworkError = () => (
+const NetworkError = () =>
+(
   <Message icon error>
     <Icon name="circle notched" loading />
     <Message.Content>
       <Message.Header>Network error!</Message.Header>
         Attempting to reconnect.
       </Message.Content>
-  </Message>);
+  </Message>
+);
 
 
-const Navbar = ({ error }: {error: Object}) => (
+const Navbar = ({ error }: {error: Object}) =>
+(
   <div className={css(styles.navbar)}>
     {error
     ? <NetworkError />
     : <nav>
       <Link to={ROOT_URL} className={css(styles.link)}>Slung</Link>
     </nav>}
-  </div>);
+  </div>
+);
 
 export default connect(
-  (state) => ({ error: getWebSocketError(state) }),
+  (state) =>
+    ({ error: getWebSocketError(state) }),
 )(Navbar);
