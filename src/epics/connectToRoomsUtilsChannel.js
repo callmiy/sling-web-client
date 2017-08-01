@@ -3,14 +3,13 @@ import { Observable } from 'rxjs/Observable';
 import {
   CONNECT_TO_ROOMS_UTILS_CHANNEL,
   CHANNEL_EVENT_ROOM_CREATED,
-  CREATE_ROOM_SUCCESS,
-  ROOM_JOINED,
 } from './../constants';
 import {
   connectToRoomsUtilsChannelSuccess,
 } from './../actions/connectToRoomsUtilsChannel';
 import { fetchUserRoomsSuccess } from './../actions/fetchUserRooms';
 import { fetchRoomsSuccess } from './../actions/fetchRooms';
+import { createRoomSuccess, roomJoined } from './../actions/createRoom';
 
 export default (action$: Object) =>
   action$.ofType(CONNECT_TO_ROOMS_UTILS_CHANNEL)
@@ -41,17 +40,11 @@ export default (action$: Object) =>
           const { user_id, status } = response.meta;
 
           if (status === 'new') {
-            observer.next({
-              type: CREATE_ROOM_SUCCESS,
-              response,
-            });
+            observer.next(createRoomSuccess(response));
           }
 
           if (user_id === userId) {
-            observer.next({
-              type: ROOM_JOINED,
-              response,
-            });
+            observer.next(roomJoined(response));
           }
         });
 
