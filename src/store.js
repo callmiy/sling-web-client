@@ -22,4 +22,4 @@ if (process.env.NODE_ENV !== 'production') {
   middlewares.push(logger);
 }
 
-export default createStore(reducers, applyMiddleware(...middlewares));
+export default () => createStore(reducers, applyMiddleware(...middlewares));
