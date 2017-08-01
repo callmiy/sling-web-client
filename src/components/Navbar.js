@@ -45,7 +45,7 @@ const Navbar = ({ error }: {error: Object}) => (
     {error
     ? <NetworkError />
     : <nav>
-      <Link to={ROOT_URL} className={css(styles.link)}>Sling</Link>
+      <Link to={ROOT_URL} className={css(styles.link)}>Slung</Link>
     </nav>}
   </div>);
 
