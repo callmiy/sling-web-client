@@ -4,10 +4,12 @@ import { Socket } from 'phoenix';
 import {
   getWebSocketUrl,
   CONNECT_TO_SOCKET,
-  SOCKET_CONNECTED,
-  WEBSOCKET_ERROR,
 } from './../constants';
 import { readSession } from './../authManager';
+import {
+  socketConnected,
+  socketError,
+} from './../actions/connectToSocket';
 
 const socketObservable = Observable.create((observer: Object) => {
   const socket = new Socket(`${getWebSocketUrl()}/socket`, { params: {
@@ -17,11 +19,11 @@ const socketObservable = Observable.create((observer: Object) => {
   socket.connect();
 
   socket.onOpen(() =>
-      observer.next({ type: SOCKET_CONNECTED, socket }),
+      observer.next(socketConnected(socket)),
   );
 
   socket.onError((error) =>
-      observer.next({ type: WEBSOCKET_ERROR, error }),
+      observer.next(socketError(error)),
   );
 
   return () => {
@@ -29,12 +31,10 @@ const socketObservable = Observable.create((observer: Object) => {
   };
 });
 
-const connectToSocket = (
+export default (
   action$: Object,
 ) => action$.ofType(CONNECT_TO_SOCKET)
 .switchMap(() =>
   socketObservable
     .catch((error) => Observable.of(error)),
 );
-
-export default connectToSocket;
