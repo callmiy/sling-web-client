@@ -12,7 +12,13 @@ type propType = {
   rest?: Object,
 }
 const AuthRequired = (props: propType) => {
-  const { isAuthenticated, AuthComponent, shouldAuthenticate, ...rest } = props;
+  const {
+    isAuthenticated,
+    AuthComponent,
+    shouldAuthenticate,
+    ...rest
+  } = props;
+
   return (
     <Route
       {...rest}

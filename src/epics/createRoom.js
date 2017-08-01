@@ -9,7 +9,7 @@ import {
 } from './../actions/createRoom';
 
 
-const createRoom = (action$: Object) =>
+export default (action$: Object) =>
   action$.ofType(CREATE_NEW_ROOM)
     .switchMap(({ channel, room, cb }) =>
       Observable.create((observer) => {
@@ -39,5 +39,3 @@ const createRoom = (action$: Object) =>
         cb(room_id);
       }
     });
-
-export default createRoom;

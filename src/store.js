@@ -3,9 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import logger from 'redux-logger';
-
 import type { Observable } from 'rxjs';
-
 import reducers from './reducers';
 import rootEpic from './epics';
 
@@ -24,6 +22,4 @@ if (process.env.NODE_ENV !== 'production') {
   middlewares.push(logger);
 }
 
-const store = createStore(reducers, applyMiddleware(...middlewares));
-
-export default () => store;
+export default createStore(reducers, applyMiddleware(...middlewares));
