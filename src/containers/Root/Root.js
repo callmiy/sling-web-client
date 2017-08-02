@@ -17,9 +17,10 @@ import {
   ROOT_URL,
   SIGNUP_URL,
   ROOM_URL,
+  BASE_NAME,
 } from './../../constants';
 
-class Root extends Component {
+export default class Root extends Component {
   componentDidMount() {
     const { shouldAuthenticate, refresh } = this.props;
     if (shouldAuthenticate) {
@@ -38,7 +39,7 @@ class Root extends Component {
 
     return (
       <Provider store={store}>
-        <Router basename="/slung">
+        <Router basename={BASE_NAME}>
           <Switch>
             <AuthRequired
               isAuthenticated={isAuthenticated}
@@ -65,5 +66,3 @@ class Root extends Component {
     );
   }
 }
-
-export default Root;

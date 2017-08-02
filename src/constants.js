@@ -21,6 +21,7 @@ export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 export const LOGIN_URL = '/login';
 export const SIGNUP_URL = '/signup';
 export const ROOT_URL = '/';
+export const BASE_NAME = '/slung';
 export const ROOM_URL = '/r/:id';
 export const roomUrl = (id: string) => `/r/${id}`;
 export const LOGIN_FORM_NAME = 'loginForm';

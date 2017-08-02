@@ -1,6 +1,6 @@
 // @flow
 import { Observable } from 'rxjs/Observable';
-import { REFRESH_SESSION, LOGIN_URL } from './../constants';
+import { REFRESH_SESSION, BASE_NAME } from './../constants';
 import { ajaxSettingRxjs } from './../actions/api';
 import { refreshFailed } from './../actions/refresh';
 import ajaxErrorHandler from './../actions/ajaxErrorHandlerRx';
@@ -22,7 +22,7 @@ const refresh = (
     .switchMap((x) => x)
     .catch((error) => {
       purgeSession();
-      window.location = LOGIN_URL;
+      window.location = BASE_NAME;
       return Observable.of(refreshFailed(ajaxErrorHandler(error)));
     });
 
