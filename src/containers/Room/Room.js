@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { css } from 'aphrodite';
 import RoomSidebar from './../../components/RoomSidebar';
 import MessageForm from './../../components/MessageForm';
@@ -11,7 +10,6 @@ import Navbar from './../../components/Navbar';
 import RevealRoomNavBar from './../../components/RevealRoomNavBar';
 import {
   NEW_MESSAGE_FORM,
-  ROOT_URL,
 } from './../../constants';
 import styles from './styles';
 
@@ -35,15 +33,9 @@ class Room extends Component {
   componentWillReceiveProps(nextProps: Object) {
     if (nextProps.id !== this.props.id) {
       this.leaveChannel();
-      if (this.props.userAllowedInRoom) {
-        this.props.connectToRoomChannel(nextProps.socket, nextProps.id);
-      }
     }
 
-    if (this.props.userAllowedInRoom &&
-      !this.props.socket &&
-      nextProps.socket
-    ) {
+    if (!this.props.socket && nextProps.socket) {
       this.props.connectToRoomChannel(nextProps.socket, nextProps.id);
     }
   }
@@ -60,10 +52,6 @@ class Room extends Component {
     this.props.leaveRoomChannel(this.props.channel)
 
   render() {
-    if (!this.props.userAllowedInRoom) {
-      return <Redirect to={ROOT_URL} />;
-    }
-
     const moreMessages = this.props.pagination.total_pages >
       this.props.pagination.page_number;
 

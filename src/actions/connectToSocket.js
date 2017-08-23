@@ -5,7 +5,8 @@ import {
   WEBSOCKET_ERROR,
 } from './../constants';
 
-const connectToSocket = () => ({
+const connectToSocket = (user: Object) => ({
+  user,
   type: CONNECT_TO_SOCKET,
 });
 

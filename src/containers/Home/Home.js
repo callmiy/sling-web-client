@@ -17,29 +17,9 @@ const styles = StyleSheet.create({
 });
 
 class Home extends Component {
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.connectToRoomsUtilsChannel(
-        this.props.socket, this.props.userId, this.getRoomPaginationParams(),
-      );
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Object) {
-    if (!this.props.socket && nextProps.socket) {
-      this.props.connectToRoomsUtilsChannel(
-        nextProps.socket, this.props.userId, this.getRoomPaginationParams(),
-      );
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.leaveRoomsUtilsChannel(this.props.roomsChannel);
-  }
-
   getRoomPaginationParams = (page: number = 1) => ({
     page,
-    page_size: this.pageSize,
+    page_size: this.props.pagination.page_size,
   })
 
   pageSize = 5
@@ -60,6 +40,8 @@ class Home extends Component {
       pagination,
       startSubmit,
      } = this.props;
+
+    const { page_size } = pagination;
 
     return (
       <div style={{ display: 'flex', height: '100%' }} >
@@ -86,14 +68,14 @@ class Home extends Component {
               </h3>
 
               <Rooms
-                rooms={rooms.slice(0, this.pageSize)}
+                rooms={rooms.slice(0, page_size)}
                 currentUserRoomsIds={currentUserRoomsIds}
                 joinRoom={(room) => this.createRoom(room)}
               />
 
               <Pagination
                 {...pagination}
-                pageSize={this.pageSize}
+                pageSize={page_size}
                 numRooms={rooms.length}
                 loadRooms={this.loadRooms}
               />

@@ -10,31 +10,38 @@ import {
   socketConnected,
   socketError,
 } from './../actions/connectToSocket';
+import {
+  connectToRoomsUtilsChannel,
+} from './../actions/connectToRoomsUtilsChannel';
 
-const socketObservable = Observable.create((observer: Object) => {
-  const socket = new Socket(`${getWebSocketUrl()}/socket`, { params: {
-    token: readSession(),
-  } });
+const socketObservable = (user) =>
+ Observable.create((observer: Object) => {
+   const socket = new Socket(`${getWebSocketUrl()}/socket`, { params: {
+     token: readSession(),
+   } });
 
-  socket.connect();
+   socket.connect();
 
-  socket.onOpen(() =>
-      observer.next(socketConnected(socket)),
-  );
+   socket.onOpen(() => {
+     observer.next(socketConnected(socket));
+     observer.next(
+      connectToRoomsUtilsChannel(socket, user.id, { page: 1, page_size: 5 }),
+    );
+   });
 
-  socket.onError((error) =>
+   socket.onError((error) =>
       observer.next(socketError(error)),
   );
 
-  return () => {
+   return () => {
     // socket.disconnect();
-  };
-});
+   };
+ });
 
 export default (
   action$: Object,
 ) => action$.ofType(CONNECT_TO_SOCKET)
-.switchMap(() =>
-  socketObservable
+.switchMap(({ user }) =>
+  socketObservable(user)
     .catch((error) => Observable.of(error)),
 );

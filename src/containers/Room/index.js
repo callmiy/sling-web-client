@@ -9,7 +9,6 @@ import {
   getLoadingOlderMessages,
   getPresentUsers,
   getCurrentRoom,
-  getUserRoomFromRoomId,
 } from './../../reducers';
 import Room from './Room';
 import {
@@ -39,8 +38,6 @@ export default connect(
     loadingOlderMessages: getLoadingOlderMessages(state),
     presentUsers: getPresentUsers(state),
     room: getCurrentRoom(state),
-    userAllowedInRoom: !!getUserRoomFromRoomId(
-      state, ownProps.match.params.id),
   }),
   {
     connectToRoomChannel,

@@ -7,6 +7,6 @@ export default (response: Object) => {
   writeSession(response.meta.token);
   return [
     authenticationSuccess(response),
-    connectToSocket(),
+    connectToSocket(response.data),
   ];
 };
