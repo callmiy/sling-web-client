@@ -15,15 +15,8 @@ import styles from './styles';
 
 
 class Room extends Component {
-  constructor(props: Object) {
-    super(props);
-    this.state = {
-      shouldRevealNavBar: false,
-    };
-  }
-
-  state: {
-    shouldRevealNavBar: boolean,
+  state = {
+    shouldRevealNavBar: false,
   }
 
   componentDidMount() {
