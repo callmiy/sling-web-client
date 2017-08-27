@@ -16,7 +16,7 @@ import {
 
 const socketObservable = (user) =>
  Observable.create((observer: Object) => {
-   const socket = new Socket(`${getWebSocketUrl()}/socket`, { params: {
+   const socket = new Socket(getWebSocketUrl(), { params: {
      token: readSession(),
    } });
 
